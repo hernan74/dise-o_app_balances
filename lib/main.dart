@@ -1,4 +1,5 @@
 import 'package:ejemplo_diseno/src/pages/home_page.dart';
+import 'package:ejemplo_diseno/src/pages/informacion_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,8 +13,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: ' Titulo',
       theme: _miTema(),
-      initialRoute: '/',
-      routes: {'/': (_) => HomePage()},
+      initialRoute: 'informacion',
+      routes: {
+        '/': (_) => HomePage(),
+        'informacion': (_) => InformacionPage(),
+        },
     );
   }
 }

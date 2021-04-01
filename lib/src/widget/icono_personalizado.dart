@@ -1,3 +1,4 @@
+import 'package:ejemplo_diseno/src/widget/crear_circulo.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -24,15 +25,15 @@ class IconoPersonalizado extends StatelessWidget {
           Stack(
             alignment: Alignment.center,
             children: [
-              _CrearCirculo(
+              CrearCirculo(
                 size: size,
                 color: color.withOpacity(0.2),
               ),
-              _CrearCirculo(
+              CrearCirculo(
                 size: size * 0.85,
                 color: Color(0xff2D1698),
               ),
-              _CrearCirculo(
+              CrearCirculo(
                 size: size * 0.68,
                 color: color.withOpacity(0.2),
               ),
@@ -45,22 +46,6 @@ class IconoPersonalizado extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _CrearCirculo extends StatelessWidget {
-  final double size;
-  final Color color;
-
-  const _CrearCirculo({Key key, this.size, this.color}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: size,
-      height: size,
-      decoration:
-          BoxDecoration(color: color, borderRadius: BorderRadius.circular(200)),
     );
   }
 }
