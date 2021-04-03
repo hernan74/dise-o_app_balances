@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class CrearCirculo extends StatelessWidget {
   final double size;
   final Color color;
+  final Widget child;
 
-  const CrearCirculo({Key key, this.size, this.color}) : super(key: key);
+  const CrearCirculo({Key key, this.size, this.color, this.child})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,6 +14,7 @@ class CrearCirculo extends StatelessWidget {
       height: size,
       decoration:
           BoxDecoration(color: color, borderRadius: BorderRadius.circular(200)),
+      child: child,
     );
   }
 }

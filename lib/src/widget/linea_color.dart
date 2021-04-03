@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class LineaColor extends StatelessWidget {
+class LineaColor extends StatefulWidget {
   final double ancho;
   final double alto;
   final Color color;
   final double bordeRedondoDerecho;
   final double bordeRedondoIzquierdo;
+  final double delayAnimacion;
 
   const LineaColor(
       {Key key,
@@ -13,18 +14,49 @@ class LineaColor extends StatelessWidget {
       this.alto = 2,
       this.color = Colors.grey,
       this.bordeRedondoDerecho = 0.0,
-      this.bordeRedondoIzquierdo = 0.0})
+      this.bordeRedondoIzquierdo = 0.0,
+      this.delayAnimacion = 0})
       : super(key: key);
+
+  @override
+  _LineaColorState createState() => _LineaColorState();
+}
+
+class _LineaColorState extends State<LineaColor>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation<double> animarCarga;
+  @override
+  void initState() {
+    controller = new AnimationController(
+        vsync: this, duration: Duration(milliseconds: 500));
+    animarCarga = Tween(begin: 0.0, end: widget.ancho).animate(CurvedAnimation(
+        parent: controller, curve: Interval(0, 1.0, curve: Curves.easeOut)));
+    controller.forward();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: ancho,
-      height: alto,
-      decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.horizontal(
-              left: Radius.circular(bordeRedondoIzquierdo),
-              right: Radius.circular(bordeRedondoDerecho))),
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) {
+        return Container(
+          width: animarCarga.value,
+          height: widget.alto,
+          decoration: BoxDecoration(
+              color: widget.color,
+              borderRadius: BorderRadius.horizontal(
+                  left: Radius.circular(widget.bordeRedondoIzquierdo),
+                  right: Radius.circular(widget.bordeRedondoDerecho))),
+        );
+      },
     );
   }
 }

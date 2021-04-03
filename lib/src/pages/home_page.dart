@@ -1,6 +1,9 @@
+import 'package:ejemplo_diseno/src/pages/informacion_page.dart';
 import 'package:ejemplo_diseno/src/widget/custom_appbar.dart';
 import 'package:ejemplo_diseno/src/widget/item_resumen_diario.dart';
 import 'package:ejemplo_diseno/src/widget/linea_color.dart';
+import 'package:ejemplo_diseno/src/widget/total_balance.dart';
+import 'package:ejemplo_diseno/src/widget/trancicion_pagina.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ejemplo_diseno/src/widget/cuadro_resumen.dart';
@@ -15,7 +18,10 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CrearAppBar(),
+              GestureDetector(
+                  onTap: () => Navigator.push(
+                      context, trancicionConvinada(InformacionPage())),
+                  child: CrearAppBar()),
               SizedBox(
                 height: 30.0,
               ),
@@ -108,13 +114,12 @@ class _CuadroBalancePrincipal extends StatelessWidget {
               SizedBox(
                 height: 20.0,
               ),
-              _CrearMontoCuadroBalance(total: total),
+              TotalBalance(
+                total: total,
+                subtitulo: 'Total balance',
+              ),
               SizedBox(
                 height: 10.0,
-              ),
-              Text(
-                'Total balance',
-                style: TextStyle(color: Colors.grey),
               ),
               SizedBox(
                 height: 30.0,
@@ -181,32 +186,6 @@ class _CrearLineaBalance extends StatelessWidget {
         )
       ],
     );
-  }
-}
-
-class _CrearMontoCuadroBalance extends StatelessWidget {
-  const _CrearMontoCuadroBalance({
-    @required this.total,
-  });
-
-  final double total;
-
-  @override
-  Widget build(BuildContext context) {
-    return RichText(
-        text: TextSpan(children: [
-      TextSpan(
-          text: '\$ ',
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25)),
-      TextSpan(
-          text: '${total.toString().split('.')[0]}',
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30)),
-      TextSpan(
-          text: ',${total.toString().split('.')[1]}',
-          style: TextStyle(color: Colors.black, fontSize: 25)),
-    ]));
   }
 }
 

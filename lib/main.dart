@@ -8,23 +8,23 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: ' Titulo',
       theme: _miTema(),
-      initialRoute: 'informacion',
+      initialRoute: '/',
       routes: {
         '/': (_) => HomePage(),
         'informacion': (_) => InformacionPage(),
-        },
+      },
     );
   }
 }
 
 ThemeData _miTema() {
   return ThemeData.light().copyWith(
-      scaffoldBackgroundColor: Color(0xff2D1698),
-      appBarTheme:
-          AppBarTheme(backgroundColor: Color(0xff2D1698), elevation: 0),);
+    scaffoldBackgroundColor: Color(0xff2D1698),
+    appBarTheme: AppBarTheme(backgroundColor: Color(0xff2D1698), elevation: 0),
+  );
 }
