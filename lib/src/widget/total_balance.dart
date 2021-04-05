@@ -14,7 +14,7 @@ class TotalBalance extends StatelessWidget {
     return Hero(
       tag: 'totalBalance',
       child: Container(
-        width: 200,
+        width: 250,
         height: 70,
         child: Column(
           mainAxisSize: MainAxisSize.min,

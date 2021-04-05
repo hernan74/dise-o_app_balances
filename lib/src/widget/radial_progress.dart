@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class RadialProgress extends StatefulWidget {
-  final porcentaje;
+  final double porcentaje;
   final Color colorPrimario;
   final Color colorSecundario;
   final double grosorPrimario;
@@ -27,14 +27,14 @@ class RadialProgress extends StatefulWidget {
 class _RadialProgressState extends State<RadialProgress>
     with SingleTickerProviderStateMixin {
   AnimationController controller;
-  double porcentajeAnterior;
+  Animation<double> porcentaje;
 
   @override
   void initState() {
-    porcentajeAnterior = widget.porcentaje;
     controller = new AnimationController(
-        vsync: this, duration: Duration(milliseconds: 200));
+        vsync: this, duration: Duration(milliseconds: 1500));
 
+    porcentaje = Tween(begin: 0.0, end: widget.porcentaje).animate(controller);
     super.initState();
   }
 
@@ -48,24 +48,24 @@ class _RadialProgressState extends State<RadialProgress>
   Widget build(BuildContext context) {
     controller.forward(from: 0.0);
 
-    final diferenciaAnimar = widget.porcentaje - porcentajeAnterior;
-    porcentajeAnterior = widget.porcentaje;
-
     return AnimatedBuilder(
       animation: controller,
       builder: (BuildContext context, Widget child) {
         return Stack(
           alignment: Alignment.center,
           children: [
-            if (widget.muestraTextoPorcentaje) Text('${widget.porcentaje} % ',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
+            if (widget.muestraTextoPorcentaje)
+              Text(
+                '${porcentaje.value.truncate()} % ',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+              ),
             Container(
               padding: EdgeInsets.all(10),
               width: widget.size,
               height: widget.size,
               child: CustomPaint(
                 painter: _MiRadialProgress(
-                    (widget.porcentaje - diferenciaAnimar) +
-                        (diferenciaAnimar * controller.value),
+                    porcentaje.value,
                     widget.colorPrimario,
                     widget.colorSecundario,
                     widget.grosorPrimario,

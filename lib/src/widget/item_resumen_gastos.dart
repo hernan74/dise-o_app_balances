@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:ejemplo_diseno/src/widget/radial_progress.dart';
 import 'package:flutter/material.dart';
 
@@ -21,35 +22,38 @@ class ItemResumenGasto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        children: <Widget>[
-          RadialProgress(
-            porcentaje: porcentaje,
-            grosorPrimario: 3,
-            grosorSecundario: 3,
-            colorPrimario: colorPrimario,
-            colorSecundario: Colors.grey.withOpacity(0.3),
-            size: 90,
-            muestraTextoPorcentaje: true,
-          ),
-          _Contenido(
-            titulo: titulo,
-            subtitulo: subtitulo,
-            monto1: monto1,
-            monto2: monto2,
-          ),
-          Spacer(),
-          Icon(
-            Icons.more_vert,
-            size: 35,
-            color: Colors.grey,
-          )
-        ],
+    return FadeIn(
+      duration: Duration(seconds: 1),
+      child: Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: <Widget>[
+            RadialProgress(
+              porcentaje: porcentaje,
+              grosorPrimario: 3,
+              grosorSecundario: 3,
+              colorPrimario: colorPrimario,
+              colorSecundario: Colors.grey.withOpacity(0.3),
+              size: 90,
+              muestraTextoPorcentaje: true,
+            ),
+            _Contenido(
+              titulo: titulo,
+              subtitulo: subtitulo,
+              monto1: monto1,
+              monto2: monto2,
+            ),
+            Spacer(),
+            Icon(
+              Icons.more_vert,
+              size: 35,
+              color: Colors.grey,
+            )
+          ],
+        ),
       ),
     );
   }

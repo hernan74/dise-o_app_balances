@@ -103,8 +103,8 @@ class _CuadroBalancePrincipal extends StatelessWidget {
     return Positioned(
       top: 0,
       child: Container(
-        width: 342.0,
-        height: 180.0,
+        width: MediaQuery.of(context).size.width - 50,
+        height: 183.0,
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(30.0)),
         child: Padding(
